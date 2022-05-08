@@ -21,11 +21,13 @@ std::vector<std::string> coup::Game::players()
 
 std::string coup::Game::winner()
 {
+    //check the game olredy started
     if(!this->is_start)
     {
                throw std::invalid_argument("not start yet");
 
     }
+    //check that only one player left
     if(this->my_players.size() == 1)
     {
         return this->my_players[0];
@@ -35,11 +37,13 @@ std::string coup::Game::winner()
 
 void coup::Game::add(std::string const &player_name)
 {
+    //add to the end of the game
     this->my_players.push_back(player_name);
 }
 
 void coup::Game::add(std::string const &player_name, int place)
 {
+    //add to the old place
     if(place<this->curr_player)
     {
         this->curr_player++;
@@ -49,6 +53,7 @@ void coup::Game::add(std::string const &player_name, int place)
 
 int coup::Game::remove(std::string const &player_name)
 {
+    //remove the player and return it place in the vector
     int i = 0;
     for(i=0; i<this->my_players.size();i++)
     {
@@ -67,6 +72,7 @@ int coup::Game::remove(std::string const &player_name)
 
  void coup::Game::change_turn()
  {
+     //change turn by 1 to the next player
     this->curr_player++;
     if(curr_player >=this->my_players.size())
     {
@@ -76,5 +82,6 @@ int coup::Game::remove(std::string const &player_name)
 
 bool coup::Game::check_live(std::string const &player_name)
 {
+    //check if the player is not dead
     return (std::find(this->my_players.begin(), this->my_players.end(), player_name) !=this-> my_players.end());
 }
